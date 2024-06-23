@@ -1,14 +1,18 @@
-import { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import style from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(searchQuery);
   };

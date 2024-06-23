@@ -9,15 +9,29 @@ import ImageModal from "../ImageModal/ImageModal";
 import { fetchImages } from "../../apiService/api.js";
 import style from "./App.module.css";
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [modalImage, setModalImage] = useState(null);
+interface UnsplashImage {
+  id: string;
+  alt_description: string;
+  urls: {
+    small: string,
+    regular: string,
+  };
+  user: {
+    name: string,
+  };
+  likes: number;
+  description?: string;
+}
 
-  const handleSearchSubmit = async (searchQuery) => {
+const App: React.FC = () => {
+  const [images, setImages] = useState<UnsplashImage[]>([]);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [modalImage, setModalImage] = useState<UnsplashImage | null>(null);
+
+  const handleSearchSubmit = async (searchQuery: string) => {
     if (!searchQuery.trim()) {
       toast.error("Please enter a search term.");
       return;
@@ -51,7 +65,7 @@ const App = () => {
     }
   };
 
-  const openModal = (image) => {
+  const openModal = (image: UnsplashImage) => {
     setModalImage(image);
   };
 
@@ -65,9 +79,7 @@ const App = () => {
       {error && <ErrorMessage message={error} />}
       <ImageGallery images={images} onImageClick={openModal} />
       {loading && <Loader />}
-      {images.length > 0 && !loading && (
-        <LoadMoreBtn onClick={loadMoreImages} />
-      )}
+      {images.length > 0 && !loading && <LoadMoreBtn onClick={loadMoreImages} />}
       {modalImage && <ImageModal image={modalImage} onClose={closeModal} />}
     </div>
   );

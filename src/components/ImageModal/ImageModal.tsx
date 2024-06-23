@@ -1,12 +1,27 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import style from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ image, onClose }) => {
+interface ImageModalProps {
+  image: {
+    urls: {
+      regular: string,
+    },
+    alt_description: string,
+    user: {
+      name: string,
+    },
+    likes: number,
+    description?: string,
+  } | null;
+  onClose: () => void;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ image, onClose }) => {
   useEffect(() => {
-    const handleEsc = (event) => {
+    const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }
@@ -19,7 +34,7 @@ const ImageModal = ({ image, onClose }) => {
     };
   }, [onClose]);
 
-  const handleOverlayClick = (event) => {
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
@@ -35,11 +50,7 @@ const ImageModal = ({ image, onClose }) => {
     >
       {image && (
         <div>
-          <img
-            src={image.urls.regular}
-            alt={image.alt_description}
-            className={style.imageModalImage}
-          />
+          <img src={image.urls.regular} alt={image.alt_description} className={style.imageModalImage} />
           <div className={style.imageModalInfo}>
             <p>Author: {image.user.name}</p>
             <p>Likes: {image.likes}</p>
