@@ -1,14 +1,7 @@
 import React from "react";
 import ImageCard from "../ImageCard/ImageCard";
 import style from "./ImageGallery.module.css";
-
-interface UnsplashImage {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string;
-  };
-}
+import { UnsplashImage } from "../../types";
 
 interface ImageGalleryProps {
   images: UnsplashImage[];

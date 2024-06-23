@@ -1,13 +1,9 @@
 import React from "react";
 import style from "./ImageCard.module.css";
+import { UnsplashImage } from "../../types";
 
 interface ImageCardProps {
-  image: {
-    urls: {
-      small: string;
-    };
-    alt_description: string;
-  };
+  image: UnsplashImage;
   onClick: () => void;
 }
 

@@ -1,21 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, MouseEvent } from "react";
 import Modal from "react-modal";
 import style from "./ImageModal.module.css";
+import { UnsplashImage } from "../../types";
 
 Modal.setAppElement("#root");
 
 interface ImageModalProps {
-  image: {
-    urls: {
-      regular: string,
-    },
-    alt_description: string,
-    user: {
-      name: string,
-    },
-    likes: number,
-    description?: string,
-  } | null;
+  image: UnsplashImage | null;
   onClose: () => void;
 }
 
@@ -34,19 +25,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ image, onClose }) => {
     };
   }, [onClose]);
 
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
     <Modal
       isOpen={!!image}
       onRequestClose={onClose}
       className={style.imageModalContent}
       overlayClassName={style.imageModalOverlay}
-      onClick={handleOverlayClick}
     >
       {image && (
         <div>

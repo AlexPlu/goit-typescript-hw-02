@@ -8,20 +8,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal";
 import { fetchImages } from "../../apiService/api.js";
 import style from "./App.module.css";
-
-interface UnsplashImage {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string,
-    regular: string,
-  };
-  user: {
-    name: string,
-  };
-  likes: number;
-  description?: string;
-}
+import { UnsplashImage } from "../../types";
 
 const App: React.FC = () => {
   const [images, setImages] = useState<UnsplashImage[]>([]);
