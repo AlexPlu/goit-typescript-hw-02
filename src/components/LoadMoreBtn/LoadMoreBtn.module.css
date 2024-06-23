@@ -1,0 +1,22 @@
+.loadMoreBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #61dafb, #21a1f1);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loadMoreBtn:hover {
+  background: linear-gradient(135deg, #21a1f1, #61dafb);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
