@@ -9,7 +9,7 @@ interface UnsplashResponse {
 }
 
 export const fetchImages = async (searchQuery: string, pageNumber: number): Promise<UnsplashResponse> => {
-  const response = await axios.get(UNSPLASH_API_URL, {
+  const response = await axios.get<UnsplashResponse>(UNSPLASH_API_URL, {
     params: {
       query: searchQuery,
       page: pageNumber,
